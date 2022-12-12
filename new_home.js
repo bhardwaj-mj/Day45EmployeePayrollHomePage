@@ -14,21 +14,20 @@ const getEmployeePayrollDataFromStorage = () => {
 const createInnerHtml = () => {
     const headerHtml = "<th></th><th>Name</th><th>Gender</th><th>Department</th>" + 
                         "<th>Salary</th><th>Start Date</th><th>Actions</th>";
-    //if (empPayrollList.length == 0 ) return;                    
+    if (empPayrollList.length == 0 ) return;                    
     let innerHtml = `${headerHtml}`;
-    let empPayrollList = createEmployeePayrollJSON();
     for (const empPayrollData of empPayrollList) {                    
     innerHtml = `${innerHtml}
      <tr>
-      <td><img class="profile" alt="" src="${empPayrollData._profilePic}"></td>
+      <td><img class="profile" src="${empPayrollData._profilePic}" alt=""></td>
       <td>${empPayrollData._name}</td>
       <td>${empPayrollData._gender}</td>
-      <td>${getDeptHtml(empPayrollData._department)}</div>
+      <td>${getDeptHtml(empPayrollData._department)}</td>
       <td>${empPayrollData._salary}</td>
-      <td>${empPayrollData._startDate}</td>
+      <td>${stringifyDate(empPayrollData._startDate)}</td>
       <td>
-         <img name="${empPayrollData._id}" onclick="remove(this)" alt="delete"src="../assets/icons/delete-black-18dp.svg">
-         <img name="${empPayrollData._id}" alt="edit" onclick="update(this)"src="../assets/icons/create-black-18dp.svg">
+         <img id="${empPayrollData._id}" onclick="remove(this)" src="../assets/icons/delete-black-18dp.svg" alt="delete">
+         <img id="${empPayrollData._id}" onclick="update(this)" src="../assets/icons/create-black-18dp.svg" alt="edit">
       </td>    
     </tr>
     `;
@@ -42,34 +41,4 @@ const getDeptHtml = (deptList) => {
         deptHtml = `${deptHtml} <div class='dept-label'>${dept}</div>`
     }
     return deptHtml;
-}
-const createEmployeePayrollJSON = () => {
-    let empPayrollListLocal =[
-        {
-            _name: 'Manoj kumar',
-            _gender: 'male',
-            _department: [
-                'Engineering',
-                'Finance'
-            ],
-            _salary:'500000',
-            _startDate: '29 Oct 2019',
-            _note:'',
-            _id: new Date().getTime(),
-            _profilePic: '../assets/profile-images/Ellipse -2.png'
-        },
-        {
-            _name: 'Monika Sharma',
-            _gender: 'Female',
-            _department: [
-                'Finance'
-            ],
-            _salary:'5000000',
-            _startDate: '29 Sept 2020',
-            _note:'',
-            _id: new Date().getTime(),
-            _profilePic: '../assets/profile-images/Ellipse -1.png'
-        }
-    ];
-    return empPayrollListLocal;
 }
